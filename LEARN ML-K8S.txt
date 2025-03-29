@@ -1,3 +1,5 @@
+kubectl get ingress -n <namespace>
+kubectl describe ingress <ingress-name> -n <namespace>
 
 
 kubectl expose deployment myapp --type=NodePort --port=80

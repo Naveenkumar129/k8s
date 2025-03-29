@@ -1,6 +1,15 @@
 kubectl get ingress -n <namespace>
 kubectl describe ingress <ingress-name> -n <namespace>
 
+kubectl get nodes -o wide  -o=jsonpath='{.items[*].status.capacity.cpu}'
+kubectl get nodes -o wide  -o=jsonpath='{.items[*].metadata.name}{"\n"}{.items[*].status.capacity.cpu}'
+kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'
+kubectl get nodes --sort-by= .status.capacity.cpu
+
+kubectl get nodes -o=jsonpath='{.items[*].metadata.name}'
+kubectl get nodes -o=jsonpath='{.items[*].status.nodeInfo.osImage}'
+
+kubectl config view --kubeconfig=/root/my-kube-config
 
 kubectl expose deployment myapp --type=NodePort --port=80
 b) kubectl expose deployment myapp --type=LoadBalancer --port=80

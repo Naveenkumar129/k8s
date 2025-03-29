@@ -1,0 +1,106 @@
+
+
+kubectl expose deployment myapp --type=NodePort --port=80
+b) kubectl expose deployment myapp --type=LoadBalancer --port=80
+c) kubectl expose deployment myapp --type=ClusterIP --port=80
+d) kubectl create service loadbalancer myapp --tcp=80:80
+
+kubectl expose deployment hello-minikube --type=NodePort
+kubectl get services
+
+# Prepare system for alias 
+
+alias k='kubectl'
+alias kgn='kubectl get nodes -o wide'
+alias kgp='kubectl get pods -o wide'
+alias kgpl='kubectl get pods -o wide --show-labels'
+alias kgsl='kubectl get services -o wide --show-labels'
+alias kgdl='kubectl get deployments -o wide --show-labels'
+---
+Helm Quiz
+Basics
+What is Helm in Kubernetes?
+What file in a Helm chart contains the metadata about the chart?
+How do you install a Helm chart into your Kubernetes cluster?
+Templates and Values
+In Helm templates, what does {{ .Values.replicaCount }} refer to?
+What is the purpose of the values.yaml file in a Helm chart?
+How would you reference a value from values.yaml inside a Helm template? Provide an example.
+Commands
+What Helm command would you use to package a chart?
+How do you list all the releases installed in your Kubernetes cluster using Helm?
+What command would you use to upgrade an existing Helm release?
+Advanced Configuration
+Explain the purpose of the --set flag in the helm install command.
+How can you override values in the values.yaml file during Helm chart installation?
+What does the helm lint command do?
+Chart Development
+What is the function of the templates directory in a Helm chart?
+How do you add a dependency in a Helm chart?
+What is the significance of the requirements.yaml file in a Helm chart?
+Deployment
+What command would you use to uninstall a Helm release?
+How do you rollback a Helm release to a previous version?
+Describe how Helm helps in managing Kubernetes applications.
+Miscellaneous
+What is a Helm repository and how do you add one?
+How do you create a new Helm chart?
+Answers
+Basics
+What is Helm in Kubernetes?
+
+Helm is a package manager for Kubernetes, which allows you to define, install, and upgrade even the most complex Kubernetes applications.
+What file in a Helm chart contains the metadata about the chart?
+
+Chart.yaml
+How do you install a Helm chart into your Kubernetes cluster?
+
+helm install <release-name> <chart-name>
+Templates and Values
+In Helm templates, what does {{ .Values.replicaCount }} refer to?
+
+It refers to the replicaCount value defined in the values.yaml file.
+What is the purpose of the values.yaml file in a Helm chart?
+
+values.yaml contains the default values for the templates in the chart.
+How would you reference a value from values.yaml inside a Helm template? Provide an example.
+
+Example: replicas: {{ .Values.replicaCount }}
+
+----
+
+DK: Kubeflow Pipelines Service Overview is a machine learning (ML) toolbox that is purpose-built to make deploying ML workflows on Kubernetes simple, portable, and scalable. Kubeflow Pipelines are reusable, end-to-end ML workflows built using the Kubeflow Pipelines SDK. The Kubeflow Pipelines Service has the following goals: End-to-end orchestration: Enable and simplify the orchestration of end-to-end machine learning pipelines Easy experimentation: M
+
+---
+When you encounter a network configuration conflict in RKE2, you can follow the steps below to troubleshoot and resolve the issue:
+
+Check the configuration files : First, check the network configuration section in /etc/rancher/rke2.ymlor ~/.kube/configto make sure there are no duplicate or conflicting configuration items, such as multiple network plug-ins or custom network settings.
+
+Clean up old configurations : If there are old network configurations, try to delete the obsolete configurations, such as deleting Flannel or Calico configuration files that are no longer used.
+
+Confirm the network mode : Determine which network mode you want to use, such as whether to change the default flannel to calico. Make sure all nodes are consistent.
+
+Update or restart : If you installed using the command line, try running to update the network configuration, or use and to restart the service and apply the new configuration rke2 upgradefor an already deployed cluster .rke2 downrke2 up
+
+Check the logs : Check RKE2's log files (usually /var/log/rancher/rke2-server.log) for specific information about network misconfiguration, which can help locate the problem.
+
+Community help : If the problem persists, you can share a detailed problem description, configuration file snippet, and error message in the Rancher community forum or GitHub issue to get professional help.
+
+Check network infrastructure : Make sure your network hardware (such as switches, routers) and external network environment do not affect RKE2's network functions.
+
+
+------
+rke2  up
+rke2 downn
+rke2 upgrade
+
+helm list
+helm list --namespae
+helm list -n namespae abc
+helm uninstall mydb   --> goes to defualt namespaae
+helm uninstall mmmm -n teamtwo
+
+helm install --values  values.yaml
+--set auth.root.password
+helm install 
+helm status 

@@ -1,0 +1,9 @@
+Best Practice Guidance from Kannika
+
+Always aim to back up the __consumer_offsets topic whenever possible—it’s your best shot at preserving consumer state.
+kannika.io
+
+When direct backup of __consumer_offsets is not feasible (e.g., in managed Kafka services with restricted access), plan for alternative offset-handling strategies like the header-based or timestamp-based methods mentioned above.
+
+Document your recovery procedures clearly, including how to reestablish consumer state after a restoration, and test them regularly to ensure effectiveness.
+kannika.io

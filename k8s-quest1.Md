@@ -1,3 +1,11 @@
+Работает только если на выходе 1 строка, поэтому нужен grep
+for i in $(kubectl --kubeconfig=.kube/config-preprod get deploy --no-headers | grep -vp "correction|rc-ui|pipeline-generator"|awk {'print $1'}) ; do export RESULT=$(kubectl --kubeconfig=. kube/config-preprod -n rc-preprod exec - it deploy/$i -- java -XshowSettings:system -version | grep "CPU\ Count") && echo $i §RESULT ; done
+
+
+#Get all resources created by chart
+helm get manifest -n $NS $CHART_NAME | yq -N eval '[.kind, .metadata.name] | join("/")' - | sort
+
+
 Name:
 
 Q1:

@@ -5,7 +5,29 @@ do export RESULT=$(kubectl --kubeconfig=. kube/config-preprod -n rc-preprod exec
 
 #Get all resources created by chart
 helm get manifest -n $NS $CHART_NAME | yq -N eval '[.kind, .metadata.name] | join("/")' - | sort
+-----
 
+#Check URL availability without curl and nc but python
+kubectl exec -n $NS deployment/$DEPLOYMENT_NAME -it -- python -c \
+'import urllib.request
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+print(urllib.request.urlopen("https://$ADDRESS").getcode())'
+
+#The same but with ssl:
+kubectl exec -n $NS deployment/$DEPLOYMENT_NAME -it -- python -c \
+'import urllib.request
+print(urllib.request.urlopen("https://$ADDRESS").getcode())'
+
+
+------
 
 Name:
 

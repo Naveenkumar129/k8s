@@ -1,5 +1,6 @@
 
-for i in $(kubectl --kubeconfig=.kube/config-preprod get deploy --no-headers | grep -vp "correction|rc-ui|pipeline-generator"|awk {'print $1'}) ; do export RESULT=$(kubectl --kubeconfig=. kube/config-preprod -n rc-preprod exec - it deploy/$i -- java -XshowSettings:system -version | grep "CPU\ Count") && echo $i §RESULT ; done
+for i in $(kubectl --kubeconfig=.kube/config-preprod get deploy --no-headers | grep -vp "correction|rc-ui|pipeline-generator"|awk {'print $1'}) ; 
+do export RESULT=$(kubectl --kubeconfig=. kube/config-preprod -n rc-preprod exec - it deploy/$i -- java -XshowSettings:system -version | grep "CPU\ Count") && echo $i §RESULT ; done
 
 
 #Get all resources created by chart
